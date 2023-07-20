@@ -19,9 +19,9 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true)
-    private long id;
-    
+    @Column(name = "user_id", unique = true)
+    private Long id;
+
     @Column(name = "user_name", length = 100, nullable = false, unique = true)
     @NotBlank(groups = CreateUser.class)
     @Size(groups = CreateUser.class, min = 2, max = 100)
@@ -33,6 +33,9 @@ public class User {
     @Size(groups = CreateUser.class, min = 8, max = 60)
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks = new ArrayList<Task>();
+
 
     public User() {
 
@@ -43,8 +46,6 @@ public class User {
         this.userName = userName;
         this.password = password;
     }
-
-//private List<Task> tasks = new ArrayList<Task>();
 
     public long getId() {
         return id;
@@ -68,6 +69,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
