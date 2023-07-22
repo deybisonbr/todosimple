@@ -1,7 +1,6 @@
 package com.daybisonbr.todosimple.services;
 
 import com.daybisonbr.todosimple.entities.User;
-import com.daybisonbr.todosimple.repositories.TaskRepository;
 import com.daybisonbr.todosimple.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,7 @@ public class UserService {
 
     @Transactional
     public User createUser(User obj){
+
         obj = this.userRepository.save(obj);
         return obj;
     }
